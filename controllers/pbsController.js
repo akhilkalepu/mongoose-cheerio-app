@@ -1,6 +1,5 @@
 var express = require("express");
 var path = require("path");
-var request = require("request");
 var router = express.Router();
 
 var axios = require("axios");
