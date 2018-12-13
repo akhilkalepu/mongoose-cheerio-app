@@ -1,5 +1,4 @@
 var express = require("express");
-var exphbs = require("express-handlebars");
 var bodyParser = require('body-parser');
 var mongoose = require("mongoose");
 
@@ -13,10 +12,11 @@ var PORT = process.env.PORT || 8888;
 
 // Set public folder as static directory
 // ===========================================================
-app.use(express.static("public"));
+app.use(express.static(__dirname + "public"));
 
 // Set Handlebars
 // ===========================================================
+var exphbs = require("express-handlebars");
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
@@ -41,4 +41,9 @@ mongoose.connect("mongodb://localhost/pbsnewshourscraper", function (error) {
 // ===========================================================
 app.listen(PORT, function () {
     console.log("Server listening on: http://localhost:" + PORT);
+});
+
+//404 Error
+app.use(function(req, res) {
+	res.render('404');
 });
