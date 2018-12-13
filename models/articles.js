@@ -4,13 +4,7 @@ var articlesSchema = new mongoose.Schema({
     title: {
         type: String,
     },
-    imgLink: {
-        type: String,
-    },
-    storyLink: {
-        type: String,
-    },
-    summary: {
+    link: {
         type: String,
     },
     createdAt: {

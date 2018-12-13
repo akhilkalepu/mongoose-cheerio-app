@@ -1,21 +1,23 @@
 var express = require("express");
-var path = require('path');
 var bodyParser = require('body-parser');
 var logger = require("morgan");
 var mongoose = require("mongoose");
+
+var axios = require("axios");
+var cheerio = require("cheerio");
 
 // Initialize Express
 // ===========================================================
 var app = express();
 
-// Public settings
+// Import the models to use database functions
 // ===========================================================
-app.use(express.static(__dirname + "/public"));
+var db = require("./models");
 var PORT = process.env.PORT || 8888;
 
-// Database
+// Set public folder as static directory
 // ===========================================================
-require("./config/connection");
+app.use(express.static("public"));
 
 // Use morgan logger for logging requests
 // ===========================================================
@@ -25,6 +27,14 @@ app.use(logger("dev"));
 // ===========================================================
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
+//Local Database Configuration with Mongoose
+// ===========================================================
+mongoose.Promise = Promise;
+mongoose.connect("mongodb://localhost/pbsnewshourscraper", function (error) {
+    if(error) throw error;
+ 	console.log("Database connected");
+});
 
 // Set Handlebars
 // ===========================================================
@@ -37,11 +47,6 @@ app.set("view engine", "handlebars");
 // ===========================================================
 var routes = require("./controllers/pbsController.js");
 app.use("/", routes);
-
-//404 Error
-app.use(function (req, res) {
-    res.render("404");
-});
 
 // Port
 // ===========================================================
