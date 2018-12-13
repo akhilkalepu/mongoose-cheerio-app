@@ -17,7 +17,7 @@ var PORT = process.env.PORT || 8888;
 
 // Set public folder as static directory
 // ===========================================================
-app.use(express.static("public"));
+app.use(express.static(__dirname + "public"));
 
 // Use morgan logger for logging requests
 // ===========================================================
@@ -26,15 +26,7 @@ app.use(logger("dev"));
 // BodyParser Settings
 // ===========================================================
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-
-//Local Database Configuration with Mongoose
-// ===========================================================
-mongoose.Promise = Promise;
-mongoose.connect("mongodb://localhost/pbsnewshourscraper", function (error) {
-    if(error) throw error;
- 	console.log("Database connected");
-});
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Set Handlebars
 // ===========================================================
@@ -43,16 +35,26 @@ var exphbs = require("express-handlebars");
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
-var handlebars = require("handlebars");
-handlebars.registerHelper("json", context => JSON.stringify(context));
+// var handlebars = require("handlebars");
+// handlebars.registerHelper("json", context => JSON.stringify(context));
 
 // Routes
 // ===========================================================
-var routes = require("./controllers/pbsController.js");
-app.use("/", routes);
+// var routes = require("./controllers/pbsController.js");
+app.use(require("./controllers/pbsController.js"));
+
+//Local Database Configuration with Mongoose
+// ===========================================================
+mongoose.Promise = Promise;
+mongoose.connect("mongodb://localhost/pbsnewshourscraper", function (error) {
+    if (error) throw error;
+    console.log("Database connected");
+});
 
 // Port
 // ===========================================================
 app.listen(PORT, function () {
     console.log("Server listening on: http://localhost:" + PORT);
 });
+
+module.exports = app;
