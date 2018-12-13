@@ -2,7 +2,7 @@ var mongoose = require("mongoose");
 
 var Schema = mongoose.Schema;
 
-var articlesSchema = new Schema({
+var ArticlesSchema = new Schema({
     title: {
         type: String,
         required: true
@@ -11,12 +11,17 @@ var articlesSchema = new Schema({
         type: String,
         required: true
     },
-    createdAt: {
-        type: Date,
-        default: Date.now
+    saved: {
+        type: Boolean,
+        required: true,
+        default: false
+    },
+    comment: {
+        type: Schema.Types.ObjectId,
+        ref: "Comment"
     }
 });
 
-var Articles = mongoose.model("Articles", articlesSchema);
+var Articles = mongoose.model("Articles", ArticlesSchema);
 
 module.exports = Articles;
