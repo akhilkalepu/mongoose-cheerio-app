@@ -1,18 +1,24 @@
 var mongoose = require("mongoose");
 
-var commentsSchema = new mongoose.Schema({
+var Schema = mongoose.Schema;
+
+var commentsSchema = new Schema({
     articleId: {
-        type: String
+        type: String,
+        required: true
     },
     name: {
-        type: String
+        type: String,
+        required: true
     },
     comment: {
-        type: String
+        type: String,
+        required: true
     },
     createdAt: {
         type: Date,
-        default: Date.now
+        default: Date.now,
+        required: true
     }
 });
 

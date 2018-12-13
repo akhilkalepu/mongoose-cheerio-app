@@ -43,6 +43,9 @@ var exphbs = require("express-handlebars");
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
+var handlebars = require("handlebars");
+handlebars.registerHelper("json", context => JSON.stringify(context));
+
 // Routes
 // ===========================================================
 var routes = require("./controllers/pbsController.js");
