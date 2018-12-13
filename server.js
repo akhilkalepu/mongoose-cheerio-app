@@ -1,10 +1,7 @@
 var express = require("express");
+var exphbs = require("express-handlebars");
 var bodyParser = require('body-parser');
-var logger = require("morgan");
 var mongoose = require("mongoose");
-
-var axios = require("axios");
-var cheerio = require("cheerio");
 
 // Initialize Express
 // ===========================================================
@@ -12,35 +9,27 @@ var app = express();
 
 // Import the models to use database functions
 // ===========================================================
-var db = require("./models");
 var PORT = process.env.PORT || 8888;
 
 // Set public folder as static directory
 // ===========================================================
-app.use(express.static(__dirname + "public"));
+app.use(express.static("public"));
 
-// Use morgan logger for logging requests
+// Set Handlebars
 // ===========================================================
-app.use(logger("dev"));
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
 
 // BodyParser Settings
 // ===========================================================
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
-// Set Handlebars
-// ===========================================================
-var exphbs = require("express-handlebars");
-
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
-app.set("view engine", "handlebars");
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // var handlebars = require("handlebars");
 // handlebars.registerHelper("json", context => JSON.stringify(context));
 
 // Routes
 // ===========================================================
-// var routes = require("./controllers/pbsController.js");
 app.use(require("./controllers/pbsController.js"));
 
 //Local Database Configuration with Mongoose
@@ -56,5 +45,3 @@ mongoose.connect("mongodb://localhost/pbsnewshourscraper", function (error) {
 app.listen(PORT, function () {
     console.log("Server listening on: http://localhost:" + PORT);
 });
-
-module.exports = app;

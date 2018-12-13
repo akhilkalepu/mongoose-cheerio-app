@@ -4,36 +4,43 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="../../public/css/style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src="jquery-3.3.1.min.js"></script>
-    <script type="text/javascript" src="../../public/js/app.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script
+        src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+        crossorigin="anonymous">
+    </script>
+    <script
+        type="text/javascript"
+        src="../../public/js/app.js">
+    </script>
     
     <title>PBS NewsHour Scraper</title>
 </head>
 
-<body>
+    <body>
 
-    <nav>
-        <div class="nav-wrapper">
-            <a href="#" class="brand-logo">PBS NewsHour Scraper</a>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a href="/">Home</a></li>
-                <li><a href="/saved">Saved Articles</a></li>
-                <li><a class="waves-effect waves-light btn">Scrape New Articles</a></li>
-            </ul>
+        <nav>
+            <div class="nav-wrapper">
+                <a href="#" class="brand-logo">PBS NewsHour Scraper</a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/saved">Saved Articles</a></li>
+                    <li><a class="waves-effect waves-light btn">Scrape New Articles</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="background-image">
+            <div class="title text-center">
+                <h1 class="text-info">PBS NewsHour Scraper</h1>
+            </div>
         </div>
-    </nav>
 
-    <div class="background-image">
-        <div class="title text-center">
-            <h1 class="text-info">PBS NewsHour Scraper</h1>
+        <div class="container" id="wrapper">
+            {{{ body }}}
         </div>
-    </div>
 
-    <div>
-        {{{ body }}}
-    </div>
-
-</body>
+    </body>
 
 </html>
