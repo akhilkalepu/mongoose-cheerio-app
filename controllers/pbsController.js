@@ -21,6 +21,8 @@ router.get("/", (req, res) => {
 
 // A GET route for scraping the PBS NewsHour's latest headlines
 router.get("/scrape", function (req, res) {
+    // Remove previously scraped articles
+    
     // First, we grab the body of the html with axios
     axios.get("https://www.pbs.org/newshour/latest").then(function (response) {
         // Then, we load that into cheerio and save it to $ for a shorthand selector
@@ -36,6 +38,7 @@ router.get("/scrape", function (req, res) {
             console.log(result);
 
             // Create a new Article using the `result` object built from scraping
+
             db.Article.create(result)
                 .then(function (dbArticle) {
                     // View the added result in the console

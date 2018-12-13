@@ -25,9 +25,6 @@ app.set("view engine", "handlebars");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// var handlebars = require("handlebars");
-// handlebars.registerHelper("json", context => JSON.stringify(context));
-
 // Routes
 // ===========================================================
 app.use(require("./controllers/pbsController.js"));
