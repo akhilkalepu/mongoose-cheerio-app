@@ -1,4 +1,5 @@
 var express = require("express");
+var hbs = require("handlebars");
 
 var axios = require("axios");
 var cheerio = require("cheerio");
@@ -15,13 +16,25 @@ var router = express.Router();
 // ===========================================================
 
 // A GET route for the root using index.handlebars
-router.get("/", (req, res) => {
-    res.render("index");
+router.get("/", function (req, res) {
+    db.Article
+        .find({
+            saved: false
+        })
+        .then(function (dbArticle) {
+            var hbsObject = {
+                articles: dbArticle
+            };
+            res.render("index", hbsObject);
+        })
+        .catch(function (err) {
+            res.json(err);
+        });
 });
 
 // A GET route for scraping the PBS NewsHour's latest headlines
 router.get("/scrape", function (req, res) {
-    // Remove previously scraped articles
+    // Remove previously scraped articles?
     
     // First, we grab the body of the html with axios
     axios.get("https://www.pbs.org/newshour/latest").then(function (response) {
@@ -55,5 +68,7 @@ router.get("/scrape", function (req, res) {
         res.redirect("/");
     });
 });
+
+// A GET route for the saved articles
 
 module.exports = router;

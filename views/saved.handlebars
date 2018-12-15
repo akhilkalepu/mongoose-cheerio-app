@@ -1,0 +1,16 @@
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">PBS NewsHour Scraper</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a href="/">Home <span class="sr-only">(current)</span></a></li>
+            <li> class="active"<a id="saved" href="/saved">Saved Articles <span class="sr-only">(current)</span></a></li>
+        </ul>
+        <form class="navbar-form navbar-left" action="/api/fetch" method="get">
+            <button class="btn btn-danger scrape">Scrape New Articles!</button>
+        </form>
+    </div>
+</nav>
+
+<h5 id="title">Saved Articles</h5>

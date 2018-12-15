@@ -12,7 +12,7 @@ var PORT = process.env.PORT || 8888;
 
 // Set public folder as static directory
 // ===========================================================
-app.use(express.static(__dirname + "public"));
+app.use(express.static("public"));
 
 // Set Handlebars
 // ===========================================================
